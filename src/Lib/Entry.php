@@ -62,6 +62,12 @@ class Entry
      */
     public $history;
 
+    /**
+     * Array of times entries (like creation or lastModified)
+     * @var $times array
+     */
+	public $times;
+
     public function __construct()
     {
         $this->uuid = null;
@@ -72,6 +78,7 @@ class Entry
         $this->stringFields = array();
         $this->binaries = array();
         $this->history = null;
+		$this->times = [];
     }
 
     /**
@@ -269,6 +276,14 @@ class Entry
                 $entry->customIcon = $reader->readTextInside();
             else if ($reader->isElement(Database::XML_TAGS))
                 $entry->tags = $reader->readTextInside();
+            else if($reader->isElement(Database::XML_TIMES)) {
+                $timesD = $reader->depth();
+                $times = [];
+                while($reader->read($timesD)) {
+                    $times[$reader->r->name] = $reader->readTextInside();
+                }
+                $entry->times = $times;
+            }
             elseif ($reader->isElement(Database::XML_STRING))
                 $entry->readString($reader);
             elseif ($reader->isElement(Database::XML_BINARY))

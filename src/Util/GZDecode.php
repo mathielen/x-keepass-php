@@ -15,7 +15,7 @@ class GZDecode
      * @param null $maxlength
      * @return bool|false|string|null
      */
-    public static function gzdecode2($data, &$filename = '', &$error = '', $maxlength = null)
+    public static function gzdecode2($data, &$filename = '', &$error = '', $maxlength = 0)
     {
         $len = strlen($data);
         if ($len < 18 || strcmp(substr($data, 0, 2), "\x1f\x8b")) {

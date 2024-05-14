@@ -41,6 +41,7 @@ class Database
     const XML_STRING_VALUE = "Value";
     const XML_HISTORY = "History";
     const XML_TAGS = "Tags";
+	const XML_TIMES = "Times";
 
     const KEY_PASSWORD = "Password";
     const KEY_STRINGFIELDS = "StringFields";
